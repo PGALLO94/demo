@@ -1,16 +1,19 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Dto.Student;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @RestController
 public class PostTestController {
 
-    @RequestMapping(value = "/test/postmethod/sayhello", method = RequestMethod.POST, consumes = "application/json")
-    public String getData(@RequestBody Student student) {
-        return "Student Name is :" + student.getName() + " Age : " + student.getAge() + " Gender is : " + student.getGender();
+    @PostMapping(value = "/test/postmethod/sayhello", consumes = "application/json")
+    public Map<String,String> getData(@RequestBody Student student) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("Student Name", student.getName());
+        map.put("Age", Integer.toString(student.getAge()));
+        map.put("Gender", student.getGender());
+        return map;
+
     }
 }
