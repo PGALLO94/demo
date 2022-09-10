@@ -1,11 +1,11 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Dto.ResultDTO;
-import com.example.demo.repository.RectangleRepository;
+import com.example.demo.Model.ResultDTO;
+import com.example.demo.Repository.RectangleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-import com.example.demo.Dto.Rectangle;
+import com.example.demo.Model.Rectangle;
 
 @RestController
 public class RectangleController {
@@ -19,11 +19,21 @@ public class RectangleController {
     public Rectangle getRectangle(@PathVariable String uuid){
         Rectangle rectangle = map.get(uuid);
         if (rectangle == null) {
-            rectangle.setWidth(-1.0f);
-            rectangle.setHeight(-1.0f);
+            return new Rectangle(-1.0f,-1.0f);
         }
         return rectangle;
     }
+
+    @GetMapping(value="/api/get-rectangleH2/{id}",produces = "application/json")
+    public Rectangle getRectangle(@PathVariable long id){
+        Rectangle rectangle = rectangleRepository.findById(id).orElse(null);
+        if (rectangle != null) {
+                return rectangle;
+        }
+        return new Rectangle(-1.0f,-1.0f);
+
+    }
+
 
     @PostMapping(value="/api/create-rectangle" , consumes = "application/json")
     public ResultDTO addRectangle(@RequestBody Rectangle rectangle){

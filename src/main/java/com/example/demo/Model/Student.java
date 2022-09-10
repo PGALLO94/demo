@@ -1,4 +1,4 @@
-package com.example.demo.Dto;
+package com.example.demo.Model;
 
 public class Student {
 
