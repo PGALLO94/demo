@@ -17,6 +17,9 @@ public class RectangleService {
     @Autowired
     private RectangleRepository rectangleRepository;
 
+    public RectangleService(RectangleRepository rectangleRepository) {
+        this.rectangleRepository = rectangleRepository;
+    }
     public Rectangle getRectangleById(long id){
         Rectangle rectangle = rectangleRepository.findById(id).orElse(null);
         if (rectangle != null) {
