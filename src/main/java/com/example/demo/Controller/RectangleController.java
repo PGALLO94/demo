@@ -31,9 +31,9 @@ public class RectangleController {
     }
 
     @PostMapping(value="/api/create-rectangle" , consumes = "application/json")
-    public ResultDTO addRectangle(@RequestBody Rectangle rectangle){
+    public ResultDTO addRectangle(@RequestBody Rectangle rectangle,ResultDTO resultDTO){
         rectangleService.createRectangle(rectangle);
-        return rectangleService.addRectangle(rectangle);
+        return rectangleService.addRectangle(rectangle,resultDTO);
     }
 
     @GetMapping(value="/api/get-all-rectangles",produces = "application/json")

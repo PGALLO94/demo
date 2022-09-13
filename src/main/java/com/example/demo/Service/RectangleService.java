@@ -12,14 +12,24 @@ import java.util.*;
 @Service
 public class RectangleService {
 
-    private Map<String, Rectangle> map  = new HashMap<>();
+    private Map<String, Rectangle> map;
 
     @Autowired
     private RectangleRepository rectangleRepository;
 
+    public RectangleService() {
+        this.map  = new HashMap<>();
+    }
+
     public RectangleService(RectangleRepository rectangleRepository) {
         this.rectangleRepository = rectangleRepository;
+        this.map  = new HashMap<>();
     }
+
+    public Map<String, Rectangle> getMap() {
+        return map;
+    }
+
     public Rectangle getRectangleById(long id){
         Rectangle rectangle = rectangleRepository.findById(id).orElse(null);
         if (rectangle != null) {
@@ -39,9 +49,8 @@ public class RectangleService {
         return rectangleRepository.save(rectangle);
     }
 
-    public ResultDTO addRectangle(Rectangle rectangle){
+    public ResultDTO addRectangle(Rectangle rectangle,ResultDTO resultDTO){
         UUID uuid = UUID.randomUUID();
-        ResultDTO resultDTO = new ResultDTO();
         map.put(uuid.toString(),rectangle);
         resultDTO.setRectangle(rectangle);
         resultDTO.setUuid(uuid);
