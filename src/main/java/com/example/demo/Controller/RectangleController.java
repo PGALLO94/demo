@@ -3,11 +3,13 @@ package com.example.demo.Controller;
 import com.example.demo.Model.ResultDTO;
 import com.example.demo.Service.RectangleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.example.demo.Model.Rectangle;
 
 @RestController
+@ApiOperation("Products API")
 public class RectangleController {
 
     @Autowired
